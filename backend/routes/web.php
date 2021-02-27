@@ -20,3 +20,5 @@ Route::get('/', function () {
 });
 Route::get('admin/form', [AdminBlogController::class, 'form'])->name('admin_form');
 Route::post('admin/post', [AdminBlogController::class, 'post'])->name('admin_post');
+Route::get('admin/form/{article_id?}', [AdminBlogController::class,'form'])->name('admin_form');
+Route::post('admin/post', [AdminBlogController::class,'post'])->name('admin_post');

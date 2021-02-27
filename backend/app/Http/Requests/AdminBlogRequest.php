@@ -28,6 +28,7 @@ class AdminBlogRequest extends FormRequest
         // バリデーションルールはここに追加する
         // 項目名 => ルールという形式で、ルールが複数ある場合は '|' で区切る
         return [
+            'article_id' => 'integer|nullable',              // 整数・null でもOK
             'post_date' => 'required|date',                 // 必須・日付
             'title'     => 'required|string|max:255',       // 必須・文字列・最大値（255文字まで）
             'body'      => 'required|string|max:10000',     // 必須・文字列・最大値（10000文字まで）
@@ -41,6 +42,7 @@ class AdminBlogRequest extends FormRequest
         // プレースホルダーを使うこともできる
         // 下記の例では :max の部分にそれぞれ設定した値（255, 10000）が入る
         return [
+            'article_id.integer' => '記事IDは整数でなければなりません',
             'post_date.required' => '日付は必須です',
             'post_date.date'     => '日付は日付形式で入力してください',
             'title.required'     => 'タイトルは必須です',
