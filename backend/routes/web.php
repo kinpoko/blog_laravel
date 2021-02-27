@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminBlogController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('admin/form', [AdminBlogController::class, 'form'])->name('admin_form');
+Route::post('admin/post', [AdminBlogController::class, 'post'])->name('admin_post');
