@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminBlogController;
-
+use App\Http\Controllers\FrontBlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +15,7 @@ use App\Http\Controllers\AdminBlogController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontBlogController::class ,'index'])->name('front_index');
 
 Route::prefix('admin')->group(function(){
     Route::post('post', [AdminBlogController::class, 'post'])->name('admin_post');

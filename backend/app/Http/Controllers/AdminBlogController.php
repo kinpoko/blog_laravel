@@ -43,7 +43,7 @@ class AdminBlogController extends Controller
         // View テンプレートでは 連想配列のキー名で値を取り出せる
 //        return view('admin_blog.form', ['input' => $input, 'article_id' => $article_id]);
         // compact 関数を使うと便利
-        return view('admin_blog.form', ['input' => $input, 'article_id' => $article_id]);
+        return view('admin-blog.form', ['input' => $input, 'article_id' => $article_id]);
     }
 
      /*ブログ記事保存処理*/
@@ -68,7 +68,7 @@ class AdminBlogController extends Controller
         // フォーム画面にリダイレクト。その際、route メソッドの第二引数にパラメータを指定できる
         return redirect()
         ->route('admin_form', ['article_id' => $article->article_id])
-        ->with('status', '記事を保存しました');
+        ->with('message', '記事を保存しました');
     }
 
 
@@ -97,7 +97,7 @@ class AdminBlogController extends Controller
         return redirect()->route('admin_list')->with('message', $message);
     }
 
-    const NUM_PER_PAGE = 10;
+    const NUM_PER_PAGE = 5;
 
      /* ブログ記事一覧 */
 

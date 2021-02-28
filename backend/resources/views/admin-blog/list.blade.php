@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>ブログ記事一覧</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/css/blog.css') }}">
-    <script src="{{ asset('js/app.js') }}"></script>
-</head>
+{{--@extends ディレクティブで「継承」するテンプレートを指定--}}
+@extends('admin-blog.app')
+{{--@section ディレクティブで title セクションを定義--}}
+@section('title', 'ブログ記事一覧')
 
-<body>
+{{--@section ディレクティブで body セクションを定義--}}
+@section('body')
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -30,7 +26,7 @@
                     <br>
 
                     {{--links メソッドでページングが生成される。しかも生成されるHTMLは Bootstrap と互換性がある--}}
-                    {{ $list->links() }}
+                    {{ $list->links('pagination::bootstrap-4') }}
                     <table class="table table-striped">
                         <tr>
                             <th width="120px">記事番号</th>
@@ -58,5 +54,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection
