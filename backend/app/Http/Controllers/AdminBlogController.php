@@ -67,10 +67,45 @@ class AdminBlogController extends Controller
 
         // フォーム画面にリダイレクト。その際、route メソッドの第二引数にパラメータを指定できる
         return redirect()
-            ->route('admin_form', ['article_id' => $article->article_id])
-            ->with('status', '記事を保存しました');
+        ->route('admin_form', ['article_id' => $article->article_id])
+        ->with('status', '記事を保存しました');
     }
 
+
+    /**
+     * ブログ記事削除処理
+     *
+     * @param AdminBlogRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(AdminBlogRequest $request)
+    {
+        // 記事IDの取得
+        $article_id = $request->input('article_id');
+
+        // Article モデルを取得して delete メソッドを実行することで削除できる
+        // このとき万が一 $article が null になる場合も想定して実装するのが良い（今回は紹介のみで使わないので割愛）
+//        $article = $this->article->find($article_id);
+//        $article->delete();
+
+        // 主キーの値があるなら destroy メソッドで削除することができる
+        // 引数は配列でも可。返り値は削除したレコード数
+        $result = $this->article->destroy($article_id);
+        $message = ($result) ? '記事を削除しました' : '記事の削除に失敗しました。';
+
+        // 記事一覧へ
+        return redirect()->route('admin_list')->with('message', $message);
+    }
+
+    const NUM_PER_PAGE = 10;
+
+     /* ブログ記事一覧 */
+
+    public function list()
+    {
+        $list = $this->article->getArticleList(self::NUM_PER_PAGE);
+        return view('admin_blog.list', compact('list'));
+    }
 
 }
 

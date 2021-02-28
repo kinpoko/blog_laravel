@@ -18,7 +18,7 @@
             
             @if (session('message'))
                 <div class="alert alert-success">
-
+                     
                     {{ session('message') }}
                 </div>
                 <br>
@@ -58,6 +58,14 @@
                 {{--CSRFトークンが生成される--}}
                 {{ csrf_field() }}
             </form>
+            @if ($article_id)
+            <br>
+            <form action="{{ route('admin_delete') }}" method="POST">
+                <input type="submit" class="btn btn-primary btn-sm" value="削除">
+                <input type="hidden" name="article_id" value="{{ $article_id }}">
+                {{ csrf_field() }}
+            </form>
+        @endif
         </div>
     </div>
 </div>

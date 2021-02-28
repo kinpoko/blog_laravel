@@ -18,7 +18,11 @@ use App\Http\Controllers\AdminBlogController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('admin/form', [AdminBlogController::class, 'form'])->name('admin_form');
-Route::post('admin/post', [AdminBlogController::class, 'post'])->name('admin_post');
-Route::get('admin/form/{article_id?}', [AdminBlogController::class,'form'])->name('admin_form');
-Route::post('admin/post', [AdminBlogController::class,'post'])->name('admin_post');
+
+Route::prefix('admin')->group(function(){
+    Route::post('post', [AdminBlogController::class, 'post'])->name('admin_post');
+    Route::get('form/{article_id?}', [AdminBlogController::class,'form'])->name('admin_form');
+    Route::post('post', [AdminBlogController::class,'post'])->name('admin_post');
+    Route::post('delete', [AdminBlogController::class,'delete'])->name('admin_delete');
+    Route::get('list', [AdminBlogController::class,'list'])->name('admin_list');
+});
