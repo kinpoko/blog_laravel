@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdminBlogRequest;
 use App\Models\Article;
 use Illuminate\Support\Arr;
+use App\Models\Category;
 
 class AdminBlogController extends Controller
 {
     /** @var Article */
     protected $article;
+    /** @var Category */
+    protected $category;
 
-    function __construct(Article $article)
+    // 1ページ当たりの表示件数
+    const NUM_PER_PAGE = 5;
+
+    function __construct(Article $article, Category $category)
     {
         $this->article = $article;
+        $this->category = $category;
     }
 
     /*ブログ記事入力フォーム*/
@@ -39,11 +46,8 @@ class AdminBlogController extends Controller
         // DBから取得した値よりも優先して表示するため、array_merge の第二引数に設定する
         $input = array_merge($input, old());
 
-        // View テンプレートへ値を渡すときは、第二引数に連想配列を設定する
-        // View テンプレートでは 連想配列のキー名で値を取り出せる
-//        return view('admin_blog.form', ['input' => $input, 'article_id' => $article_id]);
-        // compact 関数を使うと便利
-        return view('admin-blog.form', ['input' => $input, 'article_id' => $article_id]);
+        $category_list = $this->category->getCategoryList()->pluck('name', 'category_id');
+        return view('admin-blog.form', compact('input', 'article_id', 'category_list'));
     }
 
      /*ブログ記事保存処理*/
@@ -97,15 +101,55 @@ class AdminBlogController extends Controller
         return redirect()->route('admin_list')->with('message', $message);
     }
 
-    const NUM_PER_PAGE = 5;
-
      /* ブログ記事一覧 */
 
     public function list()
     {
         $list = $this->article->getArticleList(self::NUM_PER_PAGE);
-        return view('admin_blog.list', compact('list'));
+        return view('admin-blog.list', compact('list'));
     }
 
+    /**
+     * カテゴリ一覧画面
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function category()
+    {
+        $list = $this->category->getCategoryList(self::NUM_PER_PAGE);
+        return view('admin-blog.category', compact('list'));
+    }
+
+     /**
+     * カテゴリ編集・新規作成API
+     *
+     * @param AdminBlogRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function editCategory(AdminBlogRequest $request)
+    {
+        $input = $request->input();
+        $category_id = $request->input('category_id');
+
+        $category = $this->category->updateOrCreate(compact('category_id'), $input);
+
+        // APIなので json のレスポンスを返す
+        return response()->json($category);
+    }
+
+    /**
+     * カテゴリ削除API
+     *
+     * @param AdminBlogRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteCategory(AdminBlogRequest $request)
+    {
+        $category_id = $request->input('category_id');
+        $this->category->destroy($category_id);
+
+        // APIなので json のレスポンスを返す
+        return response()->json();
+    }
 }
 

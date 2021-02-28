@@ -16,6 +16,10 @@
                     </div>
             </div>
                 <div class="card-footer text-right" style="height: 30px">
+                    <a href="{{ route('front_index', ['category_id' => $article->category->category_id]) }}">
+                        {{ $article->category->name }}
+                    </a>
+                    &nbsp;&nbsp;
                     {{--updated_at も同様に自動的に Carbon インスタンスにキャストされる--}}
                     {{ $article->updated_at->format('Y/m/d H:i:s') }}
                 </div>

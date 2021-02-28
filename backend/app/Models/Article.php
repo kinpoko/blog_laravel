@@ -14,7 +14,7 @@ class Article extends Model
 
     // 「複数代入」を利用するときに指定する。追加・編集可能なカラム名のみを指定する。
     // $guarded プロパティを利用すると、逆に、追加・編集不可能なカラムを指定できる。
-    protected $fillable = ['post_date', 'title', 'body'];
+    protected $fillable = ['category_id','post_date', 'title', 'body'];
 
     // SoftDeletes トレイトを使う
     use SoftDeletes;
@@ -52,10 +52,17 @@ class Article extends Model
     public function getArticleList(int $num_per_page = 10, array $condition = [])
     {
         // パラメータの取得
+        $category_id = Arr::get($condition, 'category_id');
         $year  = Arr::get($condition, 'year');
         $month = Arr::get($condition, 'month');
 
-        $query = $this->orderBy('article_id', 'desc');
+         // Eager ロードの設定を追加
+         $query = $this->with('category')->orderBy('article_id', 'desc');
+
+         // カテゴリーIDの指定
+         if ($category_id) {
+             $query->where('category_id', $category_id);
+         }
 
         // 期間の指定
         if ($year) {
@@ -101,4 +108,15 @@ class Article extends Model
         }
         return $month_list;
 }
+ /**
+     * Category モデルのリレーション
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function category()
+    {
+        // 記事は1つのカテゴリーと関係しているので、hasOne メソッドを利用する
+        // 第一引数は関係するモデルの名前で、第二・第三引数は外部キーです
+        return $this->hasOne('App\Models\Category', 'category_id', 'category_id');
+    }
 }

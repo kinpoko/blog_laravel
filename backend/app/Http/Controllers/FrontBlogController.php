@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Http\Requests\FrontBlogRequest;
+use App\Models\Category;
 
 class FrontBlogController extends Controller
 {
@@ -14,9 +15,10 @@ class FrontBlogController extends Controller
     // 1ページ当たりの表示件数
     const NUM_PER_PAGE = 5;
 
-    function __construct(Article $article)
+    function __construct(Article $article, Category $category)
     {
         $this->article = $article;
+        $this->category = $category;
     }
 
     /**
@@ -33,9 +35,11 @@ class FrontBlogController extends Controller
         $list = $this->article->getArticleList(self::NUM_PER_PAGE, $input);
         // ページネーションリンクにクエリストリングを付け加える
         $list->appends($input);
+         // カテゴリー一覧を取得
+         $category_list = $this->category->getCategoryList();
         // 月別アーカイブの対象月リストを取得
         $month_list = $this->article->getMonthList();
-        return view('front-blog.index', compact('list', 'month_list'));
+        return view('front-blog.index', compact('list', 'month_list', 'category_list'));
     }
 }
 

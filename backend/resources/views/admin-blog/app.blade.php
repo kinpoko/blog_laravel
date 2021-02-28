@@ -7,6 +7,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/css/blog.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{--各ページで <head> タグ内に追加できるようにしておく--}}
+    @yield('head')
 </head>
 
 <body>

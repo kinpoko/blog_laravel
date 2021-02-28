@@ -23,4 +23,8 @@ Route::prefix('admin')->group(function(){
     Route::post('post', [AdminBlogController::class,'post'])->name('admin_post');
     Route::post('delete', [AdminBlogController::class,'delete'])->name('admin_delete');
     Route::get('list', [AdminBlogController::class,'list'])->name('admin_list');
+
+    Route::get('category', [AdminBlogController::class, 'category'])->name('admin_category');
+    Route::post('category/edit', [AdminBlogController::class,'editCategory'])->name('admin_category_edit');
+    Route::post('category/delete', [AdminBlogController::class, 'deleteCategory'])->name('admin_category_delete');
 });
