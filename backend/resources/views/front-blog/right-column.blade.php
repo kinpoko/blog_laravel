@@ -1,7 +1,7 @@
 {{--右カラム--}}
-<div class="col-md-3">
+<div class="col-md-4">
     <div class="card" style="margin-bottom: 20px">
-        <div class="card-header"><h4>カテゴリー</h4></div>
+        <div class="card-header"><h5>カテゴリー</h5></div>
         <ul class="list-group-flush" style="padding-inline-start: 0px">
                 @forelse($category_list as $category)
                     <li class="list-group-item">
@@ -16,7 +16,7 @@
     </div>
 
     <div class="card" style="margin-bottom: 20px">
-        <div class="card-header"><h4>月別アーカイブ</h4></div>
+        <div class="card-header"><h5>月別アーカイブ</h5></div>
             <ul class="list-group-flush" style="padding-inline-start: 0px">
                
                 @forelse($month_list as $value)

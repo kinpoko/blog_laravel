@@ -7,7 +7,7 @@
         @forelse($list as $article)
             <div class="card" style="margin-bottom: 20px">  
             {{--post_date はモデルクラスで $dates プロパティに指定してあるので、自動的に Carbon インスタンスにキャストされる--}}
-            <div class="card-body" style="margin-left: 2px">
+            <div class="card-body" style=>
                 <h4 class="card-title">{{ $article->title }}</h4>
                     <div class="card-text">
                         {{--nl2br 関数で改行文字を <br> に変換する。これをエスケープせずに表示させるため {!! !!} で囲む--}}
@@ -15,7 +15,7 @@
                         {!! nl2br(e($article->body)) !!}
                     </div>
             </div>
-                <div class="card-footer text-right" style="height: 30px">
+                <div class="card-footer text-right" >
                     <a href="{{ route('front_index', ['category_id' => $article->category->category_id]) }}">
                         {{ $article->category->name }}
                     </a>

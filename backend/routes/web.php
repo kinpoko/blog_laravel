@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\FrontBlogController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +16,8 @@ use App\Http\Controllers\FrontBlogController;
 
 Route::get('/', [FrontBlogController::class ,'index'])->name('front_index');
 
+// ログイン状態の'admin'ユーザーのみアクセス可能
+Route::group(['middleware' => ['auth', 'can:admin']], function () {
 Route::prefix('admin')->group(function(){
     Route::post('post', [AdminBlogController::class, 'post'])->name('admin_post');
     Route::get('form/{article_id?}', [AdminBlogController::class,'form'])->name('admin_form');
@@ -27,4 +28,9 @@ Route::prefix('admin')->group(function(){
     Route::get('category', [AdminBlogController::class, 'category'])->name('admin_category');
     Route::post('category/edit', [AdminBlogController::class,'editCategory'])->name('admin_category_edit');
     Route::post('category/delete', [AdminBlogController::class, 'deleteCategory'])->name('admin_category_delete');
-});
+});});
+Auth::routes([
+    'register' => false,
+]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
