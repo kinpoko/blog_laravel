@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Mail\Markdown;
 use App\Http\Requests\AdminBlogRequest;
 use App\Models\Article;
 use Illuminate\Support\Arr;
 use App\Models\Category;
+use App\Services;
 
 class AdminBlogController extends Controller
 {
@@ -15,7 +17,7 @@ class AdminBlogController extends Controller
     protected $category;
 
     // 1ページ当たりの表示件数
-    const NUM_PER_PAGE = 5;
+    const NUM_PER_PAGE = 10;
 
     function __construct(Article $article, Category $category)
     {
@@ -62,8 +64,12 @@ class AdminBlogController extends Controller
         // array_get ヘルパは配列から指定されたキーの値を取り出すメソッド
         // 指定したキーが存在しない場合のデフォルト値を第三引数に設定できる
         // 指定したキーが存在しなくても、エラーにならずデフォルト値が返るのが便利
-        $article_id = Arr::get($input, 'article_id');
 
+        $article_id = Arr::get($input, 'article_id');
+        
+        if($article_id == null){
+            $input['body'] = Markdown::parse($input['body']);
+        }
         // Eloquent モデルから利用できる updateOrCreate メソッドは、第一引数の値でDBを検索し
         // レコードが見つかったら第二引数の値でそのレコードを更新、見つからなかったら新規作成します
         // ここでは article_id でレコードを検索し、第二引数の入力値でレコードを更新、または新規作成しています
@@ -74,6 +80,8 @@ class AdminBlogController extends Controller
         ->route('admin_form', ['article_id' => $article->article_id])
         ->with('message', '記事を保存しました');
     }
+
+
 
 
     /**

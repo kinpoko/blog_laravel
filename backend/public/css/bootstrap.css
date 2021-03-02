@@ -540,6 +540,7 @@ pre code {
   font-size: inherit;
   color: inherit;
   word-break: normal;
+  background-color: #ecf0f1;
 }
 
 .pre-scrollable {

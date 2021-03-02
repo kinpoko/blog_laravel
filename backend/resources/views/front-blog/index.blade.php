@@ -12,7 +12,7 @@
                     <div class="card-text">
                         {{--nl2br 関数で改行文字を <br> に変換する。これをエスケープせずに表示させるため {!! !!} で囲む--}}
                         {{--ただし、このまま出力するととても危険なので e メソッドで htmlspecialchars 関数を通しておく--}}
-                        {!! nl2br(e($article->body)) !!}
+                        {!!$article->body!!}
                     </div>
             </div>
                 <div class="card-footer text-right" >
