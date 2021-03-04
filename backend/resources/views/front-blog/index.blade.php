@@ -3,25 +3,22 @@
 
 @section('main')
     <div class="col-md-8 col-md-offset-1">
-        {{--forelse ディレクティブを使うと、データがあるときはループし、無いときは @empty 以下を実行する--}}
+        
         @forelse($list as $article)
             <div class="card" style="margin-bottom: 20px">  
-            {{--post_date はモデルクラスで $dates プロパティに指定してあるので、自動的に Carbon インスタンスにキャストされる--}}
-            <div class="card-body" style=>
-                <h4 class="card-title">{{ $article->title }}</h4>
-                    <div class="card-text">
-                        {{--nl2br 関数で改行文字を <br> に変換する。これをエスケープせずに表示させるため {!! !!} で囲む--}}
-                        {{--ただし、このまま出力するととても危険なので e メソッドで htmlspecialchars 関数を通しておく--}}
-                        {!!$article->body!!}
-                    </div>
+            
+            <div class="card-body">
+                <div class="card-title">
+                    <h4><a href="{{ route('single_show',['article_id' => $article->article_id]) }}" style="color: black">{{$article->title }}</a></h4>　
+                    <p>{{ $article->post_date->format('Y/m/d(D)') }}<p>
+                </div>
             </div>
                 <div class="card-footer text-right" >
                     <a href="{{ route('front_index', ['category_id' => $article->category->category_id]) }}">
                         {{ $article->category->name }}
                     </a>
                     &nbsp;&nbsp;
-                    {{--updated_at も同様に自動的に Carbon インスタンスにキャストされる--}}
-                    {{ $article->updated_at->format('Y/m/d H:i:s') }}
+                    最終更新日{{ $article->updated_at->format('Y/m/d H:i:s') }}
                 </div>
             </div>
         @empty

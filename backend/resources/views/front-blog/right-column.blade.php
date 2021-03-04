@@ -1,4 +1,4 @@
-{{--右カラム--}}
+
 <div class="col-md-4">
     <div class="card" style="margin-bottom: 20px">
         <div class="card-header"><h5>カテゴリー</h5></div>

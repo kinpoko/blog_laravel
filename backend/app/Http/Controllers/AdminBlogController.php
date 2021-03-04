@@ -28,13 +28,7 @@ class AdminBlogController extends Controller
     /*ブログ記事入力フォーム*/
     public function form(int $article_id = null)
     {
-        // メソッドの引数に指定すれば、ルートパラメータを取得できる
-
-        // Eloquent モデルはクエリビルダとしても動作するので find メソッドで記事データを取得
-        // 返り値は null か App\Models\Article Object
         $article = $this->article->find($article_id);
-
-        // 記事データがあれば toArray メソッドで配列にしておき、フォーマットした post_date を入れる
         $input = [];
         if ($article) {
             $input = $article->toArray();
@@ -42,40 +36,20 @@ class AdminBlogController extends Controller
         } else {
             $article_id = null;
         }
-
-        // old ヘルパーを使うと、直前のリクエストのフラッシュデータを取得できる
-        // ここではバリデートエラーとなったときに、入力していた値を old ヘルパーで取得する
-        // DBから取得した値よりも優先して表示するため、array_merge の第二引数に設定する
         $input = array_merge($input, old());
-
         $category_list = $this->category->getCategoryList()->pluck('name', 'category_id');
         return view('admin-blog.form', compact('input', 'article_id', 'category_list'));
     }
 
      /*ブログ記事保存処理*/
-
-
     public function post(AdminBlogRequest $request)
     {
-
-       
         $input = $request->input();
-
-        // array_get ヘルパは配列から指定されたキーの値を取り出すメソッド
-        // 指定したキーが存在しない場合のデフォルト値を第三引数に設定できる
-        // 指定したキーが存在しなくても、エラーにならずデフォルト値が返るのが便利
-
         $article_id = Arr::get($input, 'article_id');
-        
         if($article_id == null){
             $input['body'] = Markdown::parse($input['body']);
         }
-        // Eloquent モデルから利用できる updateOrCreate メソッドは、第一引数の値でDBを検索し
-        // レコードが見つかったら第二引数の値でそのレコードを更新、見つからなかったら新規作成します
-        // ここでは article_id でレコードを検索し、第二引数の入力値でレコードを更新、または新規作成しています
         $article = $this->article->updateOrCreate(compact('article_id'), $input);
-
-        // フォーム画面にリダイレクト。その際、route メソッドの第二引数にパラメータを指定できる
         return redirect()
         ->route('admin_form', ['article_id' => $article->article_id])
         ->with('message', '記事を保存しました');
@@ -84,79 +58,43 @@ class AdminBlogController extends Controller
 
 
 
-    /**
-     * ブログ記事削除処理
-     *
-     * @param AdminBlogRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    /*ブログ記事削除処*/
     public function delete(AdminBlogRequest $request)
     {
-        // 記事IDの取得
         $article_id = $request->input('article_id');
-
-        // Article モデルを取得して delete メソッドを実行することで削除できる
-        // このとき万が一 $article が null になる場合も想定して実装するのが良い（今回は紹介のみで使わないので割愛）
-//        $article = $this->article->find($article_id);
-//        $article->delete();
-
-        // 主キーの値があるなら destroy メソッドで削除することができる
-        // 引数は配列でも可。返り値は削除したレコード数
         $result = $this->article->destroy($article_id);
         $message = ($result) ? '記事を削除しました' : '記事の削除に失敗しました。';
-
-        // 記事一覧へ
         return redirect()->route('admin_list')->with('message', $message);
     }
 
      /* ブログ記事一覧 */
-
     public function list()
     {
         $list = $this->article->getArticleList(self::NUM_PER_PAGE);
         return view('admin-blog.list', compact('list'));
     }
 
-    /**
-     * カテゴリ一覧画面
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+    /* カテゴリ一覧画面 */
     public function category()
     {
         $list = $this->category->getCategoryList(self::NUM_PER_PAGE);
         return view('admin-blog.category', compact('list'));
     }
 
-     /**
-     * カテゴリ編集・新規作成API
-     *
-     * @param AdminBlogRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+     /*カテゴリ編集・新規作成API */
     public function editCategory(AdminBlogRequest $request)
     {
         $input = $request->input();
         $category_id = $request->input('category_id');
-
         $category = $this->category->updateOrCreate(compact('category_id'), $input);
-
-        // APIなので json のレスポンスを返す
         return response()->json($category);
     }
 
-    /**
-     * カテゴリ削除API
-     *
-     * @param AdminBlogRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+    /* カテゴリ削除API */
     public function deleteCategory(AdminBlogRequest $request)
     {
         $category_id = $request->input('category_id');
         $this->category->destroy($category_id);
-
-        // APIなので json のレスポンスを返す
         return response()->json();
     }
 }

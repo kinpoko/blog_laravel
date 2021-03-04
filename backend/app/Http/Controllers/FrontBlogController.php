@@ -9,11 +9,9 @@ use App\Models\Category;
 
 class FrontBlogController extends Controller
 {
-    /** @var Article */
     protected $article;
 
-    // 1ページ当たりの表示件数
-    const NUM_PER_PAGE = 5;
+    const NUM_PER_PAGE = 10;
 
     function __construct(Article $article, Category $category)
     {
@@ -21,25 +19,23 @@ class FrontBlogController extends Controller
         $this->category = $category;
     }
 
-    /**
-     * ブログトップページ
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+    /*ブログトップページ*/
     function index(FrontBlogRequest $request)
     {
-        // パラメータを取得
         $input = $request->input();
-
-        // ブログ記事一覧を取得
         $list = $this->article->getArticleList(self::NUM_PER_PAGE, $input);
-        // ページネーションリンクにクエリストリングを付け加える
         $list->appends($input);
-         // カテゴリー一覧を取得
-         $category_list = $this->category->getCategoryList();
-        // 月別アーカイブの対象月リストを取得
+        $category_list = $this->category->getCategoryList();
         $month_list = $this->article->getMonthList();
         return view('front-blog.index', compact('list', 'month_list', 'category_list'));
+    }
+
+    function showpost($article_id)
+    {
+        $article = $this->article->find($article_id);
+        $category_list = $this->category->getCategoryList();
+        $month_list = $this->article->getMonthList();
+        return view('front-blog.show',compact('article','month_list', 'category_list'));   
     }
 }
 

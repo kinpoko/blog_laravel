@@ -17,8 +17,6 @@ class AdminBlogRequest extends FormRequest
      */
     public function authorize()
     {
-        // ユーザーがこのリクエストの権限を持っているかどうかを判断する
-        // ここではひとまず true にしておく
         return true;
     }
 
@@ -29,29 +27,28 @@ class AdminBlogRequest extends FormRequest
      */
     public function rules()
     {
-        // 現在実行しているアクション名を取得
-        // アクション名により、どのルールを使うのか場合分けをしておく
+      
         $action = $this->getCurrentAction();
 
         $rules['post'] = [
-            'article_id' => 'integer|nullable',              // 整数・null でもOK
-            'post_date'  => 'required|date',                 // 必須・日付
-            'title'      => 'required|string|max:255',       // 必須・文字列・最大値（255文字まで）
-            'body'       => 'required|string|max:10000',     // 必須・文字列・最大値（10000文字まで）
+            'article_id' => 'integer|nullable',              
+            'post_date'  => 'required|date',                
+            'title'      => 'required|string|max:255',       
+            'body'       => 'required|string|max:10000',    
         ];
 
         $rules['delete'] = [
-            'article_id' => 'required|integer'     // 必須・整数
+            'article_id' => 'required|integer'     
         ];
 
         $rules['editCategory'] = [
-            'category_id'   => 'integer|min:1|nullable',    // 整数・最小値（1以上）
-            'name'          => 'required|string|max:255',   // 必須・文字列・最大値（255文字まで）
-            'display_order' => 'required|integer|min:1'     // 必須・整数・最小値（1以上）
+            'category_id'   => 'integer|min:1|nullable',    
+            'name'          => 'required|string|max:255',   
+            'display_order' => 'required|integer|min:1'     
         ];
 
         $rules['deleteCategory'] = [
-            'category_id' => 'required|integer|min:1'       // 必須・整数・最小値（1以上）
+            'category_id' => 'required|integer|min:1'    
         ];
 
         return Arr::get($rules, $action, []);
@@ -59,10 +56,6 @@ class AdminBlogRequest extends FormRequest
 
     public function messages()
     {
-        // 表示されるバリデートエラーメッセージを個別に編集したい場合は、ここに追加する
-        // 項目名.ルール => メッセージという形式で書く
-        // プレースホルダーを使うこともできる
-        // 下記の例では :max の部分にそれぞれ設定した値（255, 10000）が入る
         return [
             'post_date.required'     => '日付は必須です',
             'post_date.date'         => '日付は日付形式で入力してください',
@@ -86,12 +79,9 @@ class AdminBlogRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $action = $this->getCurrentAction();
-
-        // API以外のときは親クラスのメソッドを呼んで終わり
         if ($action == 'post' || $action == 'delete') {
             parent::failedValidation($validator);
         }
-
         $response['errors'] = $validator->errors()->toArray();
         throw new HttpResponseException(
             response()->json($response, 422)
@@ -101,8 +91,6 @@ class AdminBlogRequest extends FormRequest
 
     public function getCurrentAction()
     {
-        // 実行中のアクション名を取得
-        // App\Http\Controllers\AdminBlogController@post のような返り値が返ってくるので @ で分割
         $route_action = Route::currentRouteAction();
         list(, $action) = explode('@', $route_action);
         return $action;

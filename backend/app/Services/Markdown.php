@@ -14,17 +14,12 @@ class Markdown
     public static function parse($text)
     {
         $environment = Environment::createCommonMarkEnvironment();
-
         $environment->addExtension(new TableExtension);
-        // 追加
         $environment->addExtension(new DisallowedRawHTMLExtension());
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
-
         $converter = new CommonMarkConverter([
             'allow_unsafe_links' => false,
         ], $environment);
-
-
         return new HtmlString($converter->convertToHtml($text));
     }
 }

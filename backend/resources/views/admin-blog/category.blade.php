@@ -2,7 +2,6 @@
 @section('title', 'カテゴリ一覧')
 
 @section('head')
-    {{--jQuery は下記のファイルに記述し読み込むようにする--}}
     <script src="{{ asset('/js/category.js') }}"></script>
 @endsection
 
@@ -55,7 +54,7 @@
         </div>
     </div>
 
-    <!-- モーダル・ダイアログ -->
+  
     <div class="modal fade" id="categoryModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -68,7 +67,6 @@
                 </div>
 
                 <div class="modal-body">
-                    {{--API 通信結果表示部分--}}
                     <div id="api_result" class="hidden"></div>
 
                     <form class="form-horizontal">

@@ -1,9 +1,9 @@
-{{--@extends ディレクティブで「継承」するテンプレートを指定--}}
+
 @extends('admin-blog.app')
-{{--@section ディレクティブで title セクションを定義--}}
+
 @section('title', 'ブログ記事一覧')
 
-{{--@section ディレクティブで body セクションを定義--}}
+
 @section('body')
     <div class="container">
         <div class="row">
@@ -25,7 +25,7 @@
                 @if (count($list) > 0)
                     <br>
 
-                    {{--links メソッドでページングが生成される。しかも生成されるHTMLは Bootstrap と互換性がある--}}
+                   
                     {{ $list->links('pagination::bootstrap-4') }}
                     <table class="table table-striped">
                         <tr>
@@ -34,7 +34,6 @@
                             <th>タイトル</th>
                         </tr>
 
-                        {{--このまま foreach ループにかけることができる--}}
                         @foreach ($list as $article)
                             <tr>
                                 <td>{{ $article->article_id }}</td>
