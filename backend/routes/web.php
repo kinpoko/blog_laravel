@@ -32,7 +32,7 @@ Route::prefix('admin')->group(function(){
     Route::post('category/delete', [AdminBlogController::class, 'deleteCategory'])->name('admin_category_delete');
 });});
 Auth::routes([
-    'register' => false,
+    
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
