@@ -37,5 +37,7 @@ class FrontBlogController extends Controller
         $month_list = $this->article->getMonthList();
         return view('front-blog.show',compact('article','month_list', 'category_list'));   
     }
+
+  
 }
 

@@ -1,6 +1,16 @@
 
 <div class="col-md-4">
     <div class="card" style="margin-bottom: 20px">
+        <div class="card-header"><h5>PROFILE</h5></div>
+        <div class="card-body">
+        <h5 class="card-title">kinpoko</h5>
+        <p class="card-text">大阪の学生　最近昼夜逆転気味</p>
+        <a href="https://github.com/kinpoko" class="card-link">GitHub</a>
+        <a href="#" class="card-link">Twitter</a>
+
+    </div>
+    </div>
+    <div class="card" style="margin-bottom: 20px">
         <div class="card-header"><h5>カテゴリー</h5></div>
         <ul class="list-group-flush" style="padding-inline-start: 0px">
                 @forelse($category_list as $category)
@@ -14,7 +24,6 @@
                 @endforelse
         </ul>
     </div>
-
     <div class="card" style="margin-bottom: 20px">
         <div class="card-header"><h5>月別アーカイブ</h5></div>
             <ul class="list-group-flush" style="padding-inline-start: 0px">

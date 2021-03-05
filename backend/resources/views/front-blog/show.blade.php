@@ -1,6 +1,5 @@
 @extends('front-blog.app')
-@section('title', '{{$article->title}}')
-
+@section('title', $article->title)
 @section('main')
     <div class="col-md-8 col-md-offset-1">
         @empty($article)
@@ -9,7 +8,7 @@
         <div class="card" style="margin-bottom: 20px">  
             <div class="card-body" >
                 <div class="card-title">
-                    <h1>{{$article->title }}</h1>
+                    <h1 style="font-size: 2rem ;font-weight:bold">{{$article->title }}</h1>
                     <p style="margin-bottom: 60px">{{ $article->post_date->format('Y/m/d(D)') }}</p> 
                 </div>    
                         <p class="card-text">{!!$article->body!!}</p>

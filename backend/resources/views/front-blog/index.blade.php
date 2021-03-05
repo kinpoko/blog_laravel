@@ -3,13 +3,11 @@
 
 @section('main')
     <div class="col-md-8 col-md-offset-1">
-        
         @forelse($list as $article)
             <div class="card" style="margin-bottom: 20px">  
-            
             <div class="card-body">
                 <div class="card-title">
-                    <h4><a href="{{ route('single_show',['article_id' => $article->article_id]) }}" style="color: black">{{$article->title }}</a></h4>　
+                    <h4><a href="{{ route('single_show',['article_id' => $article->article_id]) }}" style="color: black; font-weight:bold">{{$article->title }}</a></h4>　
                     <p>{{ $article->post_date->format('Y/m/d(D)') }}<p>
                 </div>
             </div>

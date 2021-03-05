@@ -17,6 +17,7 @@ use App\Http\Controllers\FrontBlogController;
 Route::get('/', [FrontBlogController::class ,'index'])->name('front_index');
 Route::get('show/{article_id}',[FrontBlogController::class ,'showpost'])->name('single_show');
 
+
 // ログイン状態の'admin'ユーザーのみアクセス可能
 Route::group(['middleware' => ['auth', 'can:admin']], function () {
 Route::prefix('admin')->group(function(){
