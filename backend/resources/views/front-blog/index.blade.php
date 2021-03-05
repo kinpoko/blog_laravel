@@ -16,7 +16,7 @@
                         {{ $article->category->name }}
                     </a>
                     &nbsp;&nbsp;
-                    最終更新日{{ $article->updated_at->format('Y/m/d H:i:s') }}
+                    最終更新日{{ $article->updated_at->addHours(9)->format('Y/m/d H:i:s') }}
                 </div>
             </div>
         @empty
