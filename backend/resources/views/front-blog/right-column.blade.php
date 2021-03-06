@@ -6,7 +6,7 @@
         <h5 class="card-title">kinpoko</h5>
         <p class="card-text">大阪の学生　最近昼夜逆転気味</p>
         <a href="https://github.com/kinpoko" class="card-link">GitHub</a>
-        <a href="#" class="card-link">Twitter</a>
+        <a href="https://twitter.com/aaaabbbbbbcc" class="card-link">Twitter</a>
 
     </div>
     </div>
