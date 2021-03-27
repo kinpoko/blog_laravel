@@ -4,7 +4,7 @@
         <div class="card-header"><h5>PROFILE</h5></div>
         <div class="card-body">
         <h5 class="card-title">kinpoko</h5>
-        <p class="card-text">大阪の学生　最近昼夜逆転気味</p>
+        <p class="card-text">大阪の学生</p>
         <a href="https://github.com/kinpoko" class="card-link">GitHub</a>
         <a href="https://twitter.com/aaaabbbbbbcc" class="card-link">Twitter</a>
 
