@@ -20,5 +20,5 @@ And this is my blog on [heroku](https://kinpoko-blog.herokuapp.com)
 - link every posts  
 ## Reference
 - https://qiita.com/yumgoo17/items/e40e02b3fc3275bd7f23
-- https://manablog.org/category/party/
+- https://manablog.org/how-to-make-cms-using-laravel/#8
 - https://qiita.com/ucan-lab/items/56c9dc3cf2e6762672f4
