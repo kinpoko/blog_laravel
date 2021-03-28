@@ -1,13 +1,9 @@
 
 <div class="col-md-4">
     <div class="card" style="margin-bottom: 20px">
-        <div class="card-header"><h5>PROFILE</h5></div>
+        <div class="card-header"><h5>kinpokoのTwitter</h5></div>
         <div class="card-body">
-        <h5 class="card-title">kinpoko</h5>
-        <p class="card-text">大阪の学生</p>
-        <a href="https://github.com/kinpoko" class="card-link">GitHub</a>
-        <a href="https://twitter.com/aaaabbbbbbcc" class="card-link">Twitter</a>
-
+        <a class="twitter-timeline" data-height="400" data-theme="light" data-chrome="nofooter noheader" href="https://twitter.com/aaaabbbbbbcc?ref_src=twsrc%5Etfw">Tweets by aaaabbbbbbcc</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
     </div>
     <div class="card" style="margin-bottom: 20px">
