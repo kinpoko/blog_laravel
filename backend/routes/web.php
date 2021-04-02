@@ -30,6 +30,11 @@ Route::prefix('admin')->group(function(){
     Route::get('category', [AdminBlogController::class, 'category'])->name('admin_category');
     Route::post('category/edit', [AdminBlogController::class,'editCategory'])->name('admin_category_edit');
     Route::post('category/delete', [AdminBlogController::class, 'deleteCategory'])->name('admin_category_delete');
+    
+    Route::get('/imageform', [App\Http\Controllers\UploadImageController::class, "show"])->name("upload_form");
+    Route::post('/upload', [App\Http\Controllers\UploadImageController::class, "upload"])->name("upload_image");
+    Route::get('/imagelist', [App\Http\Controllers\ImageListController::class, "show"])->name("image_list");
+
 });});
 Auth::routes([
     'register' => false,
