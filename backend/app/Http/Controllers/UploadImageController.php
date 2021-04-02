@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class UploadImageController extends Controller
 {
     function show(){
-		return view("admin-blog.upload_form");
+		return view("admin-blog.upload-form");
 	}
 
 	function upload(Request $request){

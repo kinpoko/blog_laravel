@@ -10,7 +10,7 @@ class ImageListController extends Controller
 		//アップロードした画像を取得
 		$uploads = UploadImage::orderBy("id", "desc")->get();
 
-		return view("admin-blog.image_list",[
+		return view("admin-blog.image-list",[
 			"images" => $uploads
 		]);
 	}
