@@ -38,11 +38,7 @@
                             <tr>
                                 <td>{{ $article->article_id }}</td>
                                 <td>{{ $article->post_date_text }}</td>
-                                <td>
-                                    <a href="{{ route('admin_form', ['article_id' => $article->article_id]) }}">
-                                        {{ $article->title }}
-                                    </a>
-                                </td>
+                                <td><a href="{{ route('admin_form', ['article_id' => $article->article_id]) }}">{{ $article->title }}</a></td>
                             </tr>
                         @endforeach
                     </table>

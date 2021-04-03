@@ -46,9 +46,7 @@ class AdminBlogController extends Controller
     {
         $input = $request->input();
         $article_id = Arr::get($input, 'article_id');
-        if($article_id == null){
-            $input['body'] = Markdown::parse($input['body']);
-        }
+        $input['body'] = Markdown::parse($input['body']);
         $article = $this->article->updateOrCreate(compact('article_id'), $input);
         return redirect()
         ->route('admin_form', ['article_id' => $article->article_id])
@@ -58,7 +56,7 @@ class AdminBlogController extends Controller
 
 
 
-    /*ブログ記事削除処*/
+    /*ブログ記事削除*/
     public function delete(AdminBlogRequest $request)
     {
         $article_id = $request->input('article_id');

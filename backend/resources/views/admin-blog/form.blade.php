@@ -1,4 +1,5 @@
 @extends('admin-blog.app')
+
 @section('title', 'ブログ記事投稿フォーム')
 
 @section('body')
