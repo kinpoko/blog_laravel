@@ -58,3 +58,40 @@ $ php artisan make:controller ImageListController
 ```
 ### 次
 - 画像一覧ページのデザイン
+
+## 2021-04-04 add delete image 画像削除機能追加　画像一覧ページのデザイン修正
+### 参考
+- https://qiita.com/Charry/items/423cd11c04ea38dad17f
+- https://qiita.com/a05kk/items/e05a1508dc562861fcf5
+### 方法
+`app/Http/Controllers/UploadImageController.php`
+```
+function delete(Request $request){
+		$delete_image = UploadImage::find($request->image_id);
+		
+		$delete_image_path = $delete_image->file_path;
+		Storage::delete('public/'. $delete_image_path);
+		$delete_image->delete();
+		$message = ($delete_image_path) ? '画像を削除しました' : '画像の削除に失敗しました。';
+		return redirect()->route('image_list')->with('message', $message);
+		
+	}
+```
+以上追加
+
+ルーティングも指定
+
+POSTメソッドでidを渡してそれで削除する
+
+`resources/views/admin-blog/image-list.blade.php`
+```
+<form action="{{ route('delete_image') }}" method="POST">
+                    			<input type="submit" class="btn btn-primary btn-sm" value="削除">
+                    			<input type="hidden" name="image_id" value="{{ $image->id }}">
+								@csrf
+```
+### laravelのデバッグに便利
+```
+dd()
+```
+https://qiita.com/a05kk/items/e05a1508dc562861fcf5
