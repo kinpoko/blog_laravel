@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Mail\Markdown;
 use App\Http\Requests\AdminBlogRequest;
 use App\Models\Article;
 use Illuminate\Support\Arr;
 use App\Models\Category;
-use App\Services;
+use App\Services\Markdown;
 
 class AdminBlogController extends Controller
 {

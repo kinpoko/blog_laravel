@@ -43,8 +43,8 @@
                         </tr>
 				@foreach($images as $image)
 						<tr>
-							<td><a href="{{ Storage::url($image->file_path) }}">{{ $image->file_name }}</a></td>  
-							<td>{{ Storage::url($image->file_path) }}</td>
+							<td><a href="{{ $image->file_path }}">{{ $image->file_name }}</a></td>  
+							<td>{{ $image->file_path }}</td>
 							<td><form action="{{ route('delete_image') }}" method="POST">
                     			<input type="submit" class="btn btn-primary btn-sm" value="削除">
                     			<input type="hidden" name="image_id" value="{{ $image->id }}">
