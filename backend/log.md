@@ -95,3 +95,22 @@ POSTメソッドでidを渡してそれで削除する
 dd()
 ```
 https://qiita.com/a05kk/items/e05a1508dc562861fcf5
+
+## 2021-04-05 fix uploading and deleting image 画像アップロード削除機能修正
+### 方法
+S3と連携させる
+### 参考
+- [【Laravel】Amazon S3へのアップロードが「403 Access Denied」で失敗する原因と対処方法](https://qiita.com/whitia/items/271ce8485df2148702df)
+- [超簡単！LaravelでS3を利用する手順](https://qiita.com/tiwu_dev/items/ecb115a92ebfebf6a92f)
+- [【PHP】Herokuへデプロイしたアプリの投稿機能で500エラー](https://qiita.com/shin_moto/items/8e8ca6f8355df09ce827)
+### 注意点
+- パブリックアクセスを許可
+
+### s3上から削除するとき
+```
+Storage::disk('s3')->delete($delete_image_name);
+```
+### npm ERR 対処法
+### 参考
+[【初心者】npm ERR! の対処法](https://qiita.com/wafuwafu13/items/2fe43414aa6e1899f494)
+
