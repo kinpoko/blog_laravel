@@ -39,7 +39,7 @@ class IPAuthMiddleware
         $ipArr = explode(',', env("APP_IP", ""));
         \Request::setTrustedProxies([\Request::ip()],Request::HEADER_X_FORWARDED_ALL);
         if ($ipArr && !in_array(\Request::ip(), $ipArr)) {
-            dd(in_array(\Request::ip(), $ipArr));
+            dd(in_array($ipArr, \Request::ip()));
             return false;
         }
         return true;
