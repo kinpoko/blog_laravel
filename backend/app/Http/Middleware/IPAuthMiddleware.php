@@ -19,7 +19,6 @@ class IPAuthMiddleware
        
         $isPrd = !$this->isDebug();
         $isDenied = !$this->whetherThisIpAccepted();
-        dd($isPrd,$isDenied);
         if ($isPrd && $isDenied) {
             return abort(403);
         }
@@ -40,6 +39,7 @@ class IPAuthMiddleware
         $ipArr = explode(',', env("APP_IP", ""));
         \Request::setTrustedProxies([\Request::ip()],Request::HEADER_X_FORWARDED_ALL);
         if ($ipArr && !in_array(\Request::ip(), $ipArr)) {
+            dd(in_array(\Request::ip(), $ipArr));
             return false;
         }
         return true;
