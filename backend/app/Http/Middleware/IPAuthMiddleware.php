@@ -21,7 +21,7 @@ class IPAuthMiddleware
         $isDenied = !$this->whetherThisIpAccepted();
     
         if ($isPrd && $isDenied) {
-            return \Response::create(view("errors.403"), 403);
+            return abort(403);
         }
     
         return $next($request);
