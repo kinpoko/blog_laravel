@@ -15,11 +15,12 @@ class IPAuthMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+    {   
         $isPrd = $this->isDebug();
         if(!$isPrd){
-        $isDenied = !$this->whetherThisIpAccepted();
         $isPrd = !$this->isDebug();
+        $isDenied = !$this->whetherThisIpAccepted();
+    
         if ($isPrd && $isDenied) {
             return Response::create(view("errors.403"), 403);
         }

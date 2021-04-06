@@ -25,6 +25,7 @@ Route::get('show/{article_id}',[FrontBlogController::class ,'showpost'])->name('
 // IP制限
 Route::group(['prefix' => 'admin', 'middleware' => 'ip.auth'], function() {
 Route::group(['middleware' => ['auth', 'can:admin']], function () {
+
     Route::post('post', [AdminBlogController::class, 'post'])->name('admin_post');
     Route::get('form/{article_id?}', [AdminBlogController::class,'form'])->name('admin_form');
     Route::post('post', [AdminBlogController::class,'post'])->name('admin_post');
