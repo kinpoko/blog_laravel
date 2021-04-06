@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\FrontBlogController;
 use App\Http\Controllers\UploadImageController;
 use App\Http\Controllers\ImageListController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,8 +22,9 @@ Route::get('show/{article_id}',[FrontBlogController::class ,'showpost'])->name('
 
 
 // ログイン状態の'admin'ユーザーのみアクセス可能
+// IP制限
+Route::group(['prefix' => 'admin', 'middleware' => 'ip.auth'], function() {
 Route::group(['middleware' => ['auth', 'can:admin']], function () {
-Route::prefix('admin')->group(function(){
     Route::post('post', [AdminBlogController::class, 'post'])->name('admin_post');
     Route::get('form/{article_id?}', [AdminBlogController::class,'form'])->name('admin_form');
     Route::post('post', [AdminBlogController::class,'post'])->name('admin_post');
@@ -42,8 +44,3 @@ Auth::routes([
     'register' => false,
 ]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
