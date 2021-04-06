@@ -16,15 +16,14 @@ class IPAuthMiddleware
      */
     public function handle($request, Closure $next)
     {   
-        $isPrd = $this->isDebug();
-        if(!$isPrd){
+       
         $isPrd = !$this->isDebug();
         $isDenied = !$this->whetherThisIpAccepted();
     
         if ($isPrd && $isDenied) {
             return Response::create(view("errors.403"), 403);
         }
-    }
+    
         return $next($request);
     }
 
@@ -39,7 +38,7 @@ class IPAuthMiddleware
     protected function whetherThisIpAccepted()
     {
         $ipArr = explode(',', env("APP_IP", ""));
-        \Request::setTrustedProxies([\Request::ip()]);
+        \Request::setTrustedProxies([\Request::ip()],Request::HEADER_X_FORWARDED_ALL);
 
         if ($ipArr && !in_array(\Request::ip(), $ipArr)) {
             return false;
