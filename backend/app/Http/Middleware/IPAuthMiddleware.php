@@ -36,10 +36,9 @@ class IPAuthMiddleware
 
     protected function whetherThisIpAccepted()
     {
-        $ipArr = explode(',', env("APP_IP", ""));
+        $ipArr =  env("APP_IP");
         \Request::setTrustedProxies([\Request::ip()],Request::HEADER_X_FORWARDED_ALL);
-        if ($ipArr && !in_array(\Request::ip(), $ipArr)) {
-            dd(in_array($ipArr, \Request::ip()));
+        if (!(\Request::ip() ==  $ipArr)) {
             return false;
         }
         return true;
