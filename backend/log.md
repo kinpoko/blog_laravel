@@ -113,4 +113,23 @@ Storage::disk('s3')->delete($delete_image_name);
 ### npm ERR 対処法
 ### 参考
 [【初心者】npm ERR! の対処法](https://qiita.com/wafuwafu13/items/2fe43414aa6e1899f494)
-
+##  2021-04-06 iplimit　IP制限
+### 参考
+[Heroku上のLaravel AppにIP制限をかける](https://qiita.com/shosho/items/2276b755a44b6c6794af)
+### 方法
+- Middleware作成
+`app/Http/Middleware/IPAuthMiddleware.php`
+```
+ protected function whetherThisIpAccepted()
+    {
+        $ipArr =  env("APP_IP");
+        \Request::setTrustedProxies([\Request::ip()],Request::HEADER_X_FORWARDED_ALL);
+        if (!(\Request::ip() ==  $ipArr)) {
+            return false;
+        }
+        return true;
+    }
+```
+setTrustedProxiesに注意
+- Kernelに登録
+- routeに追加
