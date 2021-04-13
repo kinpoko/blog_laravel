@@ -133,3 +133,17 @@ Storage::disk('s3')->delete($delete_image_name);
 setTrustedProxiesに注意
 - Kernelに登録
 - routeに追加
+## 2021-04-12 ページネーションを使用するとHTTPSにならないbugを修正
+### 参考
+ [Laravel pagenationリンクのhttps化](https://qiita.com/takuma-jpn/items/712a3ec7abcd045a087d)
+
+ ただこのままだとlocalでうまく表示されなくなるので以下のように修正
+ ```
+ public function boot()
+    {
+        if(env('APP_DEBUG') != true){
+        \URL::forceScheme('https');
+        $this->app['request']->server->set('HTTPS','on');
+    }
+}
+ ```
