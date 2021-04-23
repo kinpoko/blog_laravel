@@ -14,16 +14,13 @@
             <a class="nav-link" href="{{ route('front_index') }}">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="https://kinpoko.github.io/react-profile">Profile</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#category">Category</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#archive">Archive</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/kinpoko">GitHub</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://twitter.com/aaaabbbbbbcc">Twitter</a>
           </li>
         </ul>
         
