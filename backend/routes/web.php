@@ -6,6 +6,7 @@ use App\Http\Controllers\FrontBlogController;
 use App\Http\Controllers\UploadImageController;
 use App\Http\Controllers\ImageListController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +42,4 @@ Route::group(['middleware' => ['auth', 'can:admin']], function () {
     Route::post('imagedelete',[UploadImageController::class, "delete"])->name("delete_image");
 
 });});
-Auth::routes([
-    'register' => false,
-]);
 
