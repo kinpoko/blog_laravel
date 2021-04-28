@@ -4,16 +4,16 @@ This is a CMS(Contents Management System）with simple features.
 And this is my blog on [heroku](https://kinpoko-blog.herokuapp.com)
 ## Technology used
 - PHP
-- laravel
-- nginx
+- Laravel
 - MySQL
-- bootstrap
 - HTML/CSS
-- docker/docker-compose
+- Docker/docker-compose
+- Amazon S3
 ## features
-- login/logout(cannot register because user is one person who management blog)
+- login/logout
 - create/edit/delete post
     - support for markdown
+- upload images
 - create/edit/delete category
 - display by post date or category
 - pagination
