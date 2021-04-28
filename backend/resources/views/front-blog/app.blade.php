@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="{{ asset('/css/blog.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/blog-show.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
-    <meta  name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="@yield('description')">
     <title>@yield('title')</title>
 </head>
 

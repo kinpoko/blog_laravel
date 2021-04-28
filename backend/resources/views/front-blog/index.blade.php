@@ -1,6 +1,6 @@
 @extends('front-blog.app')
 @section('title', 'kinpoko BLOG')
-
+@section('description','kinpokoのブログ')
 @section('main')
     <div class="col-md-8 col-md-offset-1">
         @forelse($list as $article)
