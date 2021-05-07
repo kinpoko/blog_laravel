@@ -1,5 +1,50 @@
-h4{
+.card-body h1{
     font-weight: bold;
+    font-size: 1.40625rem;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: 2em;
+    border-bottom: solid 3px #111111;
+}
+
+.card-body h2{
+    font-weight: bold;
+    font-size: 1.40625rem;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: 2em;
+    border-bottom: solid 3px #111111;
+}
+
+.card-body h3{
+    font-weight: bold;
+    font-size: 1.40625rem;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: 2em;
+    border-bottom: solid 3px #111111;
+}
+
+
+.card-body h4{
+    font-weight: bold;
+    font-size: 1.40625rem;
+    border-bottom: solid 3px #111111;
+}
+
+.card-title h1{
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0.5rem;
+    border-style: none;
+}
+
+.card-title h4{
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0.5rem;
+    border-style: none;
+    border-style: none;
 }
 
 .img-fluid{
