@@ -22,6 +22,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#archive">Archive</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('rss') }}">RSS</a>
+          </li>
         </ul>
         
       </div>
