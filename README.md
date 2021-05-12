@@ -1,7 +1,7 @@
 # blog_laravel
 ## Description
-This is a CMS(Contents Management System）with simple features.
-And this is my blog on [heroku](https://kinpoko-blog.herokuapp.com)
+This is a CMS(Contents Management System）with Laravel.
+And this is my blog on [heroku](https://kinpokoblog.com)
 ## Technology used
 - PHP
 - Laravel
