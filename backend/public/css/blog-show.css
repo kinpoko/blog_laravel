@@ -1,3 +1,4 @@
+
 .card-body h1{
     font-weight: bold;
     font-size: 1.40625rem;
@@ -47,8 +48,34 @@
     border-style: none;
 }
 
-.img-fluid{
-    height: 20em;
-    
-
+.card-body img{
+    width:100%;
+    max-width: 100%;
+    height: auto;
 }
+
+.card-body tbody tr:nth-of-type(odd) {
+        background-color: #ecf0f1;  
+}
+
+.card-body table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+  }
+  
+.card-body th,td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+  
+.card-body thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+.card-body tbody + tbody {
+    border-top: 2px solid #dee2e6;
+  }
+
