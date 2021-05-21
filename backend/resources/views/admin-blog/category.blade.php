@@ -40,7 +40,9 @@
                                     <span class="display_order">{{ $category->display_order }}</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#categoryModal" data-category_id="{{ $category->category_id }}">編集</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#categoryModal"
+                                        data-category_id="{{ $category->category_id }}">編集</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -54,7 +56,7 @@
         </div>
     </div>
 
-  
+
     <div class="modal fade" id="categoryModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">

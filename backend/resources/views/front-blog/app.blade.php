@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.css') }}">
@@ -27,8 +28,9 @@
                 @endif
             </div>
             @yield('main')
-            @include('front-blog.right-column')
+            @include('components.right-column')
         </div>
     </div>
 </body>
+
 </html>
