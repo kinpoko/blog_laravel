@@ -29,6 +29,7 @@
             </div>
             @yield('main')
             @include('components.right-column')
+            @include('components.footer')
         </div>
     </div>
 </body>

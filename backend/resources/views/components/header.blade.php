@@ -28,7 +28,6 @@
                                 <a class="nav-link" href="{{ route('rss') }}">RSS</a>
                             </li>
                         </ul>
-
                     </div>
             </nav>
         </div>
