@@ -4,7 +4,7 @@
             <h5>最近の投稿</h5>
         </div>
         <ul class="list-group-flush" style="padding-inline-start: 0px">
-            @forelse($recent_post_list as $recentpost)
+            @forelse($recent_list as $recentpost)
                 <li class="list-group-item">
                     <a href="{{ route('single_show', ['article_id' => $recentpost->article_id]) }}">{{ $recentpost->title }}
                     </a>

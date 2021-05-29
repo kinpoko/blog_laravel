@@ -27,8 +27,8 @@ class FrontBlogController extends Controller
         $list->appends($input);
         $category_list = $this->category->getCategoryList();
         $month_list = $this->article->getMonthList();
-        $recent_post_list = $this->article->getArticleList(5);
-        return view('front-blog.index', compact('list', 'month_list', 'category_list', 'recent_post_list'));
+        $recent_list = $this->article->getRecentArticleList();
+        return view('front-blog.index', compact('list', 'month_list', 'category_list', 'recent_list'));
     }
 
     function showpost($article_id)
@@ -36,10 +36,7 @@ class FrontBlogController extends Controller
         $article = $this->article->find($article_id);
         $category_list = $this->category->getCategoryList();
         $month_list = $this->article->getMonthList();
-        $recent_post_list = $this->article->getArticleList(5);
-        return view('front-blog.show',compact('article','month_list', 'category_list', 'recent_post_list'));   
+        $recent_list = $this->article->getRecentArticleList();
+        return view('front-blog.show', compact('article', 'month_list', 'category_list', 'recent_list'));
     }
-
-  
 }
-
