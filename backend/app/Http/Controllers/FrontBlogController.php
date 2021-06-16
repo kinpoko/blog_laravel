@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Http\Requests\FrontBlogRequest;
 use App\Models\Category;
+use App\Services\Description;
 
 class FrontBlogController extends Controller
 {
@@ -34,9 +35,10 @@ class FrontBlogController extends Controller
     function showpost($article_id)
     {
         $article = $this->article->find($article_id);
+        $description = Description::parse($article->body);
         $category_list = $this->category->getCategoryList();
         $month_list = $this->article->getMonthList();
         $recent_list = $this->article->getRecentArticleList();
-        return view('front-blog.show', compact('article', 'month_list', 'category_list', 'recent_list'));
+        return view('front-blog.show', compact('article', 'description', 'month_list', 'category_list', 'recent_list'));
     }
 }

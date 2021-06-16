@@ -1,4 +1,5 @@
 @extends('front-blog.app')
+@section('description', $description)
 @section('title', $article->title)
 @section('main')
     <div class="col-md-8 col-md-offset-1">
