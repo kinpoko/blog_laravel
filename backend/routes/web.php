@@ -20,7 +20,7 @@ use App\Http\Controllers\RssController;
 */
 
 Route::get('/', [FrontBlogController::class ,'index'])->name('front_index');
-Route::get('show/{article_id}',[FrontBlogController::class ,'showpost'])->name('single_show');
+Route::get('article/{article_id}',[FrontBlogController::class ,'showpost'])->name('single_show');
 Route::get('rss.xml', [RssController::class ,'index'])->name('rss');
 
 
@@ -29,7 +29,6 @@ Route::get('rss.xml', [RssController::class ,'index'])->name('rss');
 Route::group(['prefix' => 'admin', 'middleware' => 'ip.auth'], function() {
 Route::group(['middleware' => ['auth', 'can:admin']], function () {
 
-    Route::post('post', [AdminBlogController::class, 'post'])->name('admin_post');
     Route::get('form/{article_id?}', [AdminBlogController::class,'form'])->name('admin_form');
     Route::post('post', [AdminBlogController::class,'post'])->name('admin_post');
     Route::post('delete', [AdminBlogController::class,'delete'])->name('admin_delete');
@@ -41,8 +40,8 @@ Route::group(['middleware' => ['auth', 'can:admin']], function () {
     Route::post('category/delete', [AdminBlogController::class, 'deleteCategory'])->name('admin_category_delete');
     
     
-    Route::post('/upload', [UploadImageController::class, "upload"])->name("upload_image");
-    Route::get('/imagelist', [ImageListController::class, "show"])->name("image_list");
+    Route::post('upload', [UploadImageController::class, "upload"])->name("upload_image");
+    Route::get('imagelist', [ImageListController::class, "show"])->name("image_list");
     Route::post('imagedelete',[UploadImageController::class, "delete"])->name("delete_image");
 
 });});
