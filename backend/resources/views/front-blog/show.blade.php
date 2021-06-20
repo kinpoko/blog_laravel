@@ -7,7 +7,7 @@
 <meta property="og:url" content="{{ route('single_show', ['article_id' => $article->article_id]) }}" />
 <meta property="og:title" content="{{ $article->title }}" />
 <meta property="og:description" content="{{ $description }}" />
-<meta property="og:image" content="https://vercel-generating-og-images.vercel.app/{{ urlencode($article->title) }}.png?template=kinpokoblog" />
+<meta property="og:image" content="https://vercel-generating-og-images.vercel.app/{{ rawurlencode($article->title) }}.png?template=kinpokoblog" />
 @endsection
 @section('title', $article->title)
 @section('main')
