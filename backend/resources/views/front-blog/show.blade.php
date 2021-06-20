@@ -5,6 +5,7 @@
 <meta name="twitter:site" content="@aaaabbbbbbcc" />
 <meta name="twitter:creator" content="@aaaabbbbbbcc" />
 <meta property="og:url" content="{{ route('single_show', ['article_id' => $article->article_id]) }}" />
+<meta property="og:title" content="{{ $article->title }}" />
 <meta property="og:description" content="{{ $description }}" />
 <meta property="og:image" content="https://vercel-generating-og-images.vercel.app/{{ urlencode($article->title) }}.png?template=kinpokoblog" />
 @endsection
