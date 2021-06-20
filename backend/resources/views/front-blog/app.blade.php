@@ -9,7 +9,9 @@
     <script src="{{ asset('js/app.js') }}" async></script>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="@yield('description')">
+    @yield('ogp')
     <title>@yield('title')</title>
+    
 </head>
 
 <body>
