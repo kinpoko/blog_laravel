@@ -1,5 +1,13 @@
 @extends('front-blog.app')
 @section('description', $description)
+@section('ogp')
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@aaaabbbbbbcc" />
+<meta name="twitter:creator" content="@aaaabbbbbbcc" />
+<meta property="og:url" content="{{ route('single_show', ['article_id' => $article->article_id]) }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:image" content="https://vercel-generating-og-images.vercel.app/{{ urlencode($article->title) }}.png?template=kinpokoblog" />
+@endsection
 @section('title', $article->title)
 @section('main')
     <div class="col-md-8 col-md-offset-1">
